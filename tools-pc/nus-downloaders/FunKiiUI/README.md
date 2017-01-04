@@ -1,0 +1,1 @@
+﻿# A Pyhton native GUI by dojafoja, written for FunKiiU by cearp and cera1kiler. A user interface to download WiiU content straight from NUS, get legit tickets online if available, generate fake tickets for use with sig patches, and more!

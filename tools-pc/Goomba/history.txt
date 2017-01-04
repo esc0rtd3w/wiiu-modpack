@@ -1,0 +1,64 @@
+Goomba revision history
+-=-=-=-=-=-=-=-=-=-=-=-
+
+V2.0 - 2004-09-19 (FluBBa)
+   Added option to automaticly load savestates.
+   Added gamma adjustment.
+   Fixed some missing text with the new menus.
+   Tweaked some palettes.
+   Better VBLankWait.
+
+V1.9 - 2004-07-18 (FluBBa)
+   Added optional FPS meter.
+   Added setting for autosleep time.
+   Added menu for VSync on/off/slowmo.
+   Added "transparent" border.
+   Added swapping of A & B buttons.
+   Fixed transfer when used as compressed (.mbz) plugin.
+   Fixed transfer on EZFA cards when bootmenu used.
+   Changed some of the old palettes and added some more.
+
+V1.8 - 2003-11-14 (FluBBa)
+   Added support for 32kbyte ERAM for MBC1 & MBC5 also.
+   Fixed transfer of games that are 128kbyte big.
+   Fixed a smal error with the joypad reg.
+   Fixed the HALT instruction.
+   Fixed RTC routines.
+
+V1.7 - 2003-11-07 (FluBBa)
+   Added support for clock in games which use it.
+   Added support for 32kbyte external RAM,!!BEWARE!! it's not saved.
+   Fixed joypad reads, no games should use the SGB functions.
+   Fixed sprite size (Chase HQ).
+   Resets more hardware regs before exiting.
+   Workaround for the XG2 bootmenu.
+
+V1.6 - 2003-11-02 (FluBBa)
+   Fixed savestates in more games.
+   Fixed reseting of LCDCY reg when changing games.
+
+V1.5 - 2003-10-31 (FluBBa)
+   Fixed savestates in "Kirby's Dream Land" & "Pokemon Blue".
+   Fixed MBC1 for big games (1MByte+).
+   Fixed window Y position in some games.
+   Fixed reading of Serial control Reg.
+   Fixed games that uses Push to write to tilemap.
+   Fixed most WIN/BG overlay problems.
+   Optimized sprite engine.
+   Changed how IRQ is handled when writing to IRQ enable.
+
+V1.0 - 2003-10-24 (FluBBa)
+   Initial release.
+   GB-Z80 done, probably some bug left.
+   Memory done, only 8kbytes of external ram.
+   LCD done, windows not fully working.
+   Sound done, waveram not allways updated correctly.
+   MBC's, most done, no clock or ram paging yet.
+   Controller done.
+   Serial done, should act like real.
+   Savestates done, not found any problems.
+   Link Transfer done, as usual works when it wants to.
+
+V0.0 - 2003-09-24 (FluBBa)
+   Started coding.
+
