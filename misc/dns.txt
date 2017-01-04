@@ -1,0 +1,19 @@
+Tubehax
+-------
+
+Primary DNS:
+107.211.140.065
+
+Secondary DNS:
+107.211.140.065
+
+
+
+chncdcksn
+---------
+
+Primary DNS:
+104.236.072.203
+
+
+
