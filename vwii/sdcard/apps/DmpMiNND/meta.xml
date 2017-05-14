@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1.2">
+	<name>Dump Mii NAND</name>
+	<coder>Maxternal/DarkMatterCore</coder>
+	<version>v1.2</version>
+	<release_date>20131212163000</release_date>
+	<short_description>NAND dumper (in BootMii nand.bin format)</short_description>
+	<long_description>This will create a nand.bin file in SD:/nand.bin.
+and save the keys to SD:/keys.bin.
+
+Arguments:
+debug= show debug output (defaut's to 0)
+path= for a custom path to the nand.bin file on SD. E.G. path=/apps/nanddump/nand.bin
+(No folder name in the path can have more than 8 characters)</long_description>
+<ahb_access/>
+<no_ios_reload/>
+</app>

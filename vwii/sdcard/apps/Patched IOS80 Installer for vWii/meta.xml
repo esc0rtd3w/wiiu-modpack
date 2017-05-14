@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1.0">
+	<name>Patched IOS80 Installer for vWii</name>
+	<version></version>
+	<release_date>20130320231400</release_date>
+	<coder>Dr Clipper, ZRicky11, dmm, FIX94</coder>
+	<short_description>Installs IOS80</short_description>
+	<long_description>!WARNING! MODIFIES vWii SYSMENU IOS! USE AT OWN RISK IF YOU LACK BRICK PROTECTION!
+
+Installs a patched IOS80 without signature check on vWii.</long_description>
+	<no_ios_reload/>
+</app>
