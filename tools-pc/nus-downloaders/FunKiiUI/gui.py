@@ -1,3 +1,4 @@
+# add shebang here todo
 # -*- coding: utf-8 -*-
 
 
@@ -27,6 +28,7 @@ from distutils.version import LooseVersion
 import binascii
 import sys
 import sqlite3
+import time
 
 try:
     import FunKiiU as fnku
@@ -36,7 +38,7 @@ except ImportError:
 PhotoImage=tk.PhotoImage
 DEBUG = False
 
-__VERSION__="2.1.5"
+__VERSION__="2.1.7"
 targetversion="FunKiiU v2.2"
 current_gui=LooseVersion(__VERSION__)
 
@@ -129,6 +131,7 @@ class RootWindow(tk.Tk):
         self.title_dict={}
         self.has_ticket=[]
         self.errors=0
+    
                
         
         # Tab 1
@@ -143,9 +146,9 @@ class RootWindow(tk.Tk):
         logo=ttk.Label(t1_frm1,image=self.img).pack()
         lbl=ttk.Label(t1_frm2,justify='center',text='This is a simple GUI by dojafoja that was written for FunKiiU.\nCredits to cearp, cerea1killer, and all the Github contributors for writing FunKiiU.').pack()
         lbl=ttk.Label(t1_frm3,justify='center',text='If this is your first time running the program, you will need to provide the name of *that key site*. If you haven\'t already\nprovided the address to the key site, you MUST provide it below before proceeding. You only need to provide this information once!').pack(pady=15)
-        self.enterkeysite_lbl=ttk.Label(t1_frm4,text='Enter the name of *that key site*. Something like wiiu.thatkeysite.com')
+        self.enterkeysite_lbl=ttk.Label(t1_frm4,text='Enter the name of *that key site*. Remember that you MUST include the http:// or https://')
         self.enterkeysite_lbl.pack(pady=15,side='left')
-        self.http_lbl=ttk.Label(t1_frm5,text='http://')
+        self.http_lbl=ttk.Label(t1_frm5,text='')
         self.http_lbl.pack(pady=15,side='left')
         self.keysite_box=ttk.Entry(t1_frm5,width=40)
         self.keysite_box.pack(pady=15,side='left')
@@ -362,7 +365,7 @@ class RootWindow(tk.Tk):
         t4_frm10=ttk.Frame(tab4)
         t4_frm11=ttk.Frame(tab4)
 
-        lbl=ttk.Label(t4_frm0,text='Version Information:\n\nSince the FunKii-UI GUI and FunKiiU are two seperate applications developed by different authors,\nswitching versions can break compatibility and shouldn\'t be done if you don\'t know what you are\ndoing. I will try to implement a compatibility list in a future release').pack(padx=5,pady=1,side='left')
+        lbl=ttk.Label(t4_frm0,text='Version Information:\n').pack(padx=5,pady=5,side='left')
         lbl=ttk.Label(t4_frm1,text='GUI application:',font="Helvetica 13 bold").pack(padx=5,pady=5,side='left')
         lbl=ttk.Label(t4_frm2,text='Running version:\nTargeted for:').pack(padx=5,pady=1,side='left')
         lbl=ttk.Label(t4_frm2,text=__VERSION__+'\n'+targetversion).pack(padx=5,pady=1,side='left')
@@ -370,22 +373,22 @@ class RootWindow(tk.Tk):
         lbl=ttk.Label(t4_frm3,textvariable=self.newest_gui_ver).pack(padx=5,pady=1,side='left')
         lbl=ttk.Label(t4_frm4,text='Update to latest release:').pack(padx=5,pady=1,side='left')
         btn=ttk.Button(t4_frm4,text='Update',command=lambda:self.update_application('gui',self.versions['gui_new'])).pack(padx=5,pady=1,side='left')
-        lbl=ttk.Label(t4_frm5,text='Switch to different version:').pack(padx=5,pady=1,side='left')
-        self.gui_switchv_box=ttk.Combobox(t4_frm5,width=7,values=[x for x in self.versions['gui_all']],state='readonly')
-        self.gui_switchv_box.pack(padx=5,pady=1,side='left')
-        btn=ttk.Button(t4_frm5,text='Switch',command=lambda:self.update_application('gui',self.gui_switchv_box.get())).pack(padx=5,pady=1,side='left')        
-        lbl=ttk.Label(t4_frm6,text='').pack(pady=15,side='left')
+        #lbl=ttk.Label(t4_frm5,text='Switch to different version:').pack(padx=5,pady=1,side='left')
+        #self.gui_switchv_box=ttk.Combobox(t4_frm5,width=7,values=[x for x in self.versions['gui_all']],state='readonly')
+        #self.gui_switchv_box.pack(padx=5,pady=1,side='left')
+        #btn=ttk.Button(t4_frm5,text='Switch',command=lambda:self.update_application('gui',self.gui_switchv_box.get())).pack(padx=5,pady=1,side='left')        
+        #lbl=ttk.Label(t4_frm6,text='').pack(pady=15,side='left')
         lbl=ttk.Label(t4_frm7,text='FunKiiU core application:',font="Helvetica 13 bold").pack(padx=5,pady=5,side='left')
         lbl=ttk.Label(t4_frm8,text='running version:').pack(padx=5,pady=1,side='left')
         lbl=ttk.Label(t4_frm8,text=fnku.__VERSION__).pack(padx=5,pady=1,side='left')
-        lbl=ttk.Label(t4_frm9,text='latest release:').pack(padx=5,pady=1,side='left')
-        lbl=ttk.Label(t4_frm9,textvariable=self.newest_fnku_ver).pack(padx=5,pady=1,side='left')
-        lbl=ttk.Label(t4_frm10,text='Update to latest release:').pack(padx=5,pady=1,side='left')
-        btn=ttk.Button(t4_frm10,text='Update',command=lambda:self.update_application('fnku',self.versions['fnku_new'])).pack(padx=5,pady=1,side='left')
-        lbl=ttk.Label(t4_frm11,text='Switch to different version:').pack(padx=5,pady=1,side='left')
-        self.fnku_switchv_box=ttk.Combobox(t4_frm11,width=7,values=[x for x in self.versions['fnku_all']],state='readonly')
-        self.fnku_switchv_box.pack(padx=5,pady=1,side='left')
-        btn=ttk.Button(t4_frm11,text='Switch',command=lambda:self.update_application('fnku',self.fnku_switchv_box.get())).pack(padx=5,pady=1,side='left')
+        ##lbl=ttk.Label(t4_frm9,text='latest release:').pack(padx=5,pady=1,side='left')
+        #lbl=ttk.Label(t4_frm9,textvariable=self.newest_fnku_ver).pack(padx=5,pady=1,side='left')
+        #lbl=ttk.Label(t4_frm10,text='Update to latest release:').pack(padx=5,pady=1,side='left')
+        #btn=ttk.Button(t4_frm10,text='Update',command=lambda:self.update_application('fnku',self.versions['fnku_new'])).pack(padx=5,pady=1,side='left')
+        #lbl=ttk.Label(t4_frm11,text='Switch to different version:').pack(padx=5,pady=1,side='left')
+        #self.fnku_switchv_box=ttk.Combobox(t4_frm11,width=7,values=[x for x in self.versions['fnku_all']],state='readonly')
+        #self.fnku_switchv_box.pack(padx=5,pady=1,side='left')
+        #btn=ttk.Button(t4_frm11,text='Switch',command=lambda:self.update_application('fnku',self.fnku_switchv_box.get())).pack(padx=5,pady=1,side='left')
         
         t4_frm0.grid(row=0,column=1,padx=5,pady=5,sticky='w')
         t4_frm1.grid(row=1,column=1,padx=5,sticky='w')
@@ -400,8 +403,9 @@ class RootWindow(tk.Tk):
         t4_frm10.grid(row=10,column=1,padx=25,sticky='w')
         t4_frm11.grid(row=11,column=1,padx=25,sticky='w')
 
+
         self.load_program_revisions()   
-        self.check_config_keysite()
+        #self.check_config_keysite()
         self.total_dl_size.set('Total Size:')
         self.load_settings()
         self.toggle_widgets()
@@ -547,19 +551,24 @@ class RootWindow(tk.Tk):
 
 
     def update_keysite_widgets(self):
-        txt='Correct keysite is already loaded'
+        txt='keysite is loaded'
         self.enterkeysite_lbl.configure(text=txt,background='black',foreground='green',font="Helvetica 13 bold")
         self.http_lbl.pack_forget()
         self.keysite_box.pack_forget()
         self.submitkeysite_btn.pack_forget()
         
     def check_config_keysite(self):
+        keysite = fnku.get_keysite()
+        print(u'Downloading/updating data from {}'.format(keysite))
         try:
-            with open('config.json','r') as cfg:
-                config=json.load(cfg)                
-                site=config['keysite']
-                if fnku.hashlib.md5(site.encode('utf-8')).hexdigest() == fnku.KEYSITE_MD5:
-                    self.update_keysite_widgets()
+            if not fnku.download_file('{}/json'.format(keysite), 'titlekeys.json', 3):
+                message.showerror('Error','Could not download data file. Either the site is down\nor the saved keysite is incorrect. You can enter a new\nkeysite and try again.')
+            else:
+                return True
+            
+        except ValueError:
+            message.showerror('Error','The saved keysite does not appear to be a valid url.\nPlease enter a new keysite url. Remember, you MUST include\nthe http:// or https://')
+
                     
         except IOError:
             pass
@@ -616,13 +625,9 @@ class RootWindow(tk.Tk):
                    
     def populate_selection_box(self,download_data=True):
         if download_data:
-            keysite = fnku.get_keysite()
-            print(u'Downloading/updating data from {0}'.format(keysite))
-
-            if not fnku.download_file('https://{0}/json'.format(keysite), 'titlekeys.json', 3):
-                print('ERROR: Could not download data file...\n')
-            else:
-                print('DONE....Downloaded titlekeys.json succesfully')
+            if self.check_config_keysite():
+                self.update_keysite_widgets()
+                self.nb.select(self.tab2)
         try:
             self.clear_id_key_boxes()
             self.selection_list=[]    
@@ -1064,19 +1069,14 @@ class RootWindow(tk.Tk):
 
     def submit_key_site(self):
         site=self.keysite_box.get().strip()
-        if fnku.hashlib.md5(site.encode('utf-8')).hexdigest() == fnku.KEYSITE_MD5:
-            print('Correct key site, now saving...')
-            config=fnku.load_config()
-            config['keysite'] = site
-            fnku.save_config(config)
-            print('done saving, you are good to go!')
-            self.update_keysite_widgets()
-            self.populate_selection_box()
-            self.build_database()
-            self.load_title_sizes()
-            self.nb.select(self.tab2)
-        else:
-            print('Wrong key site provided. Try again')
+        config=fnku.load_config()
+        config['keysite'] = site
+        fnku.save_config(config)
+        print('done saving.')
+        #self.update_keysite_widgets()
+        self.populate_selection_box()
+        self.build_database()
+        self.load_title_sizes()
 
     def get_output_directory(self):
         out_dir=filedialog.askdirectory()
@@ -1085,9 +1085,8 @@ class RootWindow(tk.Tk):
 
     def load_program_revisions(self):
         print('Checking for program updates, this might take a few seconds.......\n')
-        url1=self.versions['fnku_url']
-        url2=self.versions['gui_url']    
-        response = urlopen(url1)
+        url=self.versions['gui_url']    
+        response = urlopen(url)
         rslts=response.read()
         rslts=str(rslts)
         x=''
@@ -1095,27 +1094,10 @@ class RootWindow(tk.Tk):
             x=x+i
         parser = VersionParser()
         parser.feed(x)
-        response = urlopen(url2)
-        rslts=response.read()
-        rslts=str(rslts)
-        x=''
-        for i in rslts:
-            x=x+i
-        parser = VersionParser()
-        parser.feed(x)
-
-        fnku_data_set = parser.fnku_data_set
-        gui_data_set = parser.gui_data_set
         
-        fnku_all=[]
-        fnku_newest=''
+        gui_data_set = parser.gui_data_set
         gui_all=[]
         gui_newest=''
-        
-        for i in fnku_data_set:
-            ver=LooseVersion(i.split('/')[4][1:-4])
-            fnku_all.append(str(ver))
-        fnku_newest=max(fnku_all)
         
         for i in gui_data_set:
             ver=LooseVersion(i.split('/')[4][1:-4])
@@ -1123,20 +1105,14 @@ class RootWindow(tk.Tk):
                 gui_all.append(ver)
                 
         gui_newest=max(gui_all)
-        if gui_newest > current_gui or fnku_newest > current_fnku:
+        if gui_newest > current_gui:
             self.notify_of_update()
         else:
             self.notify_of_update(update=False)
-            
-
-        self.versions['fnku_all']=fnku_all
-        self.versions['fnku_new']=fnku_newest
-        self.newest_fnku_ver.set(fnku_newest)
+  
         self.versions['gui_all']=[str(i) for i in gui_all]
         self.versions['gui_new']=str(gui_newest)
         self.newest_gui_ver.set(gui_newest)
-        self.gui_switchv_box.configure(values=[x for x in self.versions['gui_all']])
-        self.fnku_switchv_box.configure(values=[x for x in self.versions['fnku_all']])
         
     def download_clicked(self):
         title_list=[]
@@ -1183,17 +1159,18 @@ class RootWindow(tk.Tk):
             
             self.populate_dl_listbox()
             root.update()           
-        print(str(len(ignored))+' titles were ignored and not downloaded')
+        #print(str(len(ignored))+' titles were ignored and not downloaded')
 
     def set_icon(self):
         icon = PhotoImage(file='icon.ppm')
         self.tk.call('wm', 'iconphoto', self._w, icon)
-        
-        
+
+         
 if __name__ == '__main__':
     root=RootWindow()
     root.title('FunKii-UI')
     root.resizable(width=False,height=False)
     root.set_icon()
     root.mainloop()
+    root.save_settings()
     

@@ -1,1 +1,1 @@
-{"patch_dlc": true, "tickets_only": false, "auto_fetching": "prompt", "remove_ignored": true, "patch_demo": true, "simulate_mode": false, "dl_behavior": 1, "fetch_on_batch": false, "fetch_dlc": true, "fetch_updates": true, "retry_count": 3, "output_dir": ""}
+{"patch_dlc": 1, "tickets_only": 0, "auto_fetching": "prompt", "remove_ignored": 1, "patch_demo": 1, "simulate_mode": 0, "dl_behavior": 1, "fetch_on_batch": 0, "fetch_dlc": 1, "fetch_updates": 1, "retry_count": 3, "output_dir": ""}
